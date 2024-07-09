@@ -4,7 +4,7 @@ import GenerateButton from "./Components/GenerateButton.js";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [quote, setQuote] = useState("Click the button to generate a quote");
+  const [quote, setQuote] = useState("");
   const [author, setAuthor] = useState("");
   const [generate, setGenerate] = useState(false);
   const url = "https://quotes15.p.rapidapi.com/quotes/random/?language_code=en";
@@ -36,7 +36,6 @@ function App() {
       };
 
       fetchQuote();
-
       setGenerate(false);
     } // eslint-disable-next-line
   }, [generate]);
@@ -44,7 +43,10 @@ function App() {
   return (
     <div className="App">
       <h1>Quote generator</h1>
-      <Quote text={quote} author={author} />
+      <Quote
+        text={quote === "" ? "Click to generate a quote" : "'" + quote + "'"}
+        author={author}
+      />
       <GenerateButton onGenerate={onGenerate} />
     </div>
   );
